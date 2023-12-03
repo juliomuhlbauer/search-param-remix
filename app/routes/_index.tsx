@@ -6,7 +6,6 @@ import { ChevronDownIcon } from "lucide-react";
 import { Portal } from "@ark-ui/react";
 import { Select } from "app/components/ui/select";
 import { CITIES } from "cities";
-import { css } from "styled-system/css";
 
 export const meta: MetaFunction = () => {
   return [
@@ -31,10 +30,6 @@ export default function Index() {
 
   return (
     <div>
-      <div className={css({ fontSize: "2xl", fontWeight: "bold" })}>
-        Hello 🐼!
-      </div>
-
       <Select.Root
         items={items}
         value={selectedCity ? [selectedCity] : []}
