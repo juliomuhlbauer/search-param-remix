@@ -1,10 +1,11 @@
 import type { MetaFunction } from "@remix-run/node";
 import { useSearchParams } from "@remix-run/react";
 
-import { Portal, Select } from "@ark-ui/react";
 import { ChevronDownIcon } from "lucide-react";
 
-import "styles/select.css";
+import { Portal } from "@ark-ui/react";
+import { CITIES } from "cities";
+import { Select } from "components/ui/select";
 
 export const meta: MetaFunction = () => {
   return [
@@ -20,7 +21,12 @@ export default function Index() {
 
   console.log("search param value:", selectedCity);
 
-  const items = ["React", "Solid", "Vue"];
+  const items = CITIES.map((city) => {
+    return {
+      label: city.city,
+      value: city.city,
+    };
+  });
 
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
@@ -29,7 +35,11 @@ export default function Index() {
         value={selectedCity ? [selectedCity] : []}
         onValueChange={({ value }) =>
           setSearchParams((params) => {
-            params.set("city", value[0]);
+            if (value[0]) {
+              params.set("city", value[0]);
+            } else {
+              params.delete("city");
+            }
             return params;
           })
         }
@@ -52,8 +62,8 @@ export default function Index() {
                   Frameworks
                 </Select.ItemGroupLabel>
                 {items.map((item) => (
-                  <Select.Item key={item} item={item}>
-                    <Select.ItemText>{item}</Select.ItemText>
+                  <Select.Item key={item.value} item={item}>
+                    <Select.ItemText>{item.label}</Select.ItemText>
                     <Select.ItemIndicator>✓</Select.ItemIndicator>
                   </Select.Item>
                 ))}
