@@ -32,9 +32,7 @@ export default function Index() {
   return (
     <Container>
       <Stack>
-        <h1>Search Param</h1>
-
-        <h1>{selectedCity}</h1>
+        <h1>Search Param: {selectedCity}</h1>
 
         <Select.Root
           positioning={{ sameWidth: true }}
